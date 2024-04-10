@@ -40,7 +40,9 @@
 }
 
 /* Base */
-* {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
@@ -68,6 +70,10 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+a {
+  display: inline-block;
 }
 
 address {
@@ -204,22 +210,56 @@ address {
 }
 
 .chefs-title {
-  margin-bottom: 0 auto 80px;
-  max-width: 540px;
+  margin: 0 auto 80px;
+  position: relative;
+}
+
+.chefs-text p {
+  margin-bottom: 24px;
+}
+
+.chefs-text p:last-child {
+  margin-bottom: 0px;
 }
 
 .chefs-title::before,
 .chefs-title::after {
+  position: absolute;
+  bottom: 24px;
   display: block;
   width: 352px;
   border: 2px solid var(--color-brand-light);
   content: "";
+  height: 0;
+}
+
+.chefs-title::before {
+  left: 0;
+}
+
+.chefs-title::after {
+  right: 0;
 }
 
 .chef-photo {
   border-radius: 4px 4px 4px 200px;
   box-shadow: -16px 16px 0 0 var(--color-primary-light),
     -16px 16px 0 2px var(--color-secondary-dark);
+}
+
+.chefs-list {
+  display: flex;
+  gap: 40px 30px;
+  flex-wrap: wrap;
+}
+
+.chefs-item {
+  flex-basis: calc((100% - 30px) / 2);
+}
+
+.chef-card {
+  display: flex;
+  gap: 30px;
 }
 
 /* Traditions section */
@@ -257,6 +297,7 @@ address {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 44px;
   height: 44px;
   padding: 0;
@@ -280,6 +321,12 @@ address {
 .format-title {
   font-weight: 600;
   font-size: 24px;
+}
+
+.formats-container {
+  display: flex;
+  gap: 32px;
+  align-items: center;
 }
 
 .formats-list {
@@ -311,17 +358,78 @@ address {
 }
 
 /* Contacts section */
+.contact-section {
+  padding-bottom: 96px;
+}
+
 .contacts-title {
   margin-bottom: 16px;
 }
 
+.contact-container {
+  display: flex;
+  gap: 32px;
+}
+
+.contact-map {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 16px;
+}
+
 /* Footer */
 .footer {
+  position: relative;
   background-image: url("../img/footer-background.png");
   background-color: var(--color-primary-dark);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  padding: 32px 0;
+}
+
+.footer::before,
+.footer::after {
+  content: "";
+  bottom: 0;
+  position: absolute;
+  background-repeat: no-repeat;
+}
+
+.footer::before {
+  width: 180px;
+  height: 120px;
+  background-image: url("../img/decor-bread-small.png");
+}
+
+.footer::after {
+  right: 0;
+  width: 380px;
+  height: 190px;
+  background-image: url("../img/decor-bread-large.png");
+}
+
+.footer-container {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-nav,
+.footer-address {
+  display: flex;
+  flex-basis: 50%;
+  flex-grow: 1;
+  gap: 20px;
+}
+
+.footer-logo,
+.footer-menu {
+  flex-grow: 1;
+}
+
+.address-list,
+.address-info {
+  flex-grow: 1;
 }
 
 .address-link {
@@ -337,8 +445,40 @@ address {
 
 .address-copyright {
   font-size: 14px;
+  color: var(--color-secondary-dark);
 }
 
 .address-icon {
   fill: var(--color-primary-light);
+}
+
+/* Modal */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.backdrop.is-hidden {
+  display: none;
+}
+
+.modal {
+  width: 880px;
+  height: 880px;
+  position: relative;
+  background-color: var(--color-primary-light);
+  border-radius: 32px;
+}
+
+.modal-btn-close {
+  position: absolute;
+  top: 40px;
+  right: 40px;
 }
